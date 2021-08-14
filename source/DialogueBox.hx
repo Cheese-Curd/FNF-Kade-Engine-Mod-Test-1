@@ -87,6 +87,26 @@ class DialogueBox extends FlxSpriteGroup
 				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
+			case 'wocky':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('images/dialogueBox', 'kapi');
+				box.animation.addByPrefix('normalOpen', 'Text Box Appear instance 1', 24, false);
+				box.animation.addByIndices('normal', 'Text Box Appear instance 1', [4], "", 24);
+			case 'beathoven':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('images/dialogueBox', 'kapi');
+				box.animation.addByPrefix('normalOpen', 'Text Box Appear instance 1', 24, false);
+				box.animation.addByIndices('normal', 'Text Box Appear instance 1', [4], "", 24);
+			case 'hairball':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('images/dialogueBox', 'kapi');
+				box.animation.addByPrefix('normalOpen', 'Text Box Appear instance 1', 24, false);
+				box.animation.addByIndices('normal', 'Text Box Appear instance 1', [4], "", 24);
+			case 'nyaw':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('images/dialogueBox', 'kapi');
+				box.animation.addByPrefix('normalOpen', 'Text Box Appear instance 1', 24, false);
+				box.animation.addByIndices('normal', 'Text Box Appear instance 1', [4], "", 24);
 		}
 
 		this.dialogueList = dialogueList;
