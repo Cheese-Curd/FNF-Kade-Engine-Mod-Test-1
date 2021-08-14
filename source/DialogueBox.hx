@@ -87,6 +87,7 @@ class DialogueBox extends FlxSpriteGroup
 				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
+			// Kapi lol
 			case 'wocky':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('images/dialogueBox', 'kapi');
