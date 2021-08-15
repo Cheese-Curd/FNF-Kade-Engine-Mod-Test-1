@@ -30,6 +30,7 @@ class DialogueBox extends FlxSpriteGroup
 
 	var portraitLeft:FlxSprite;
 	var portraitRight:FlxSprite;
+	var portraitMiddle:FlxSprite;
 
 	var handSelect:FlxSprite;
 	var bgFade:FlxSprite;
@@ -46,6 +47,10 @@ class DialogueBox extends FlxSpriteGroup
 			case 'thorns':
 				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
+			case 'wocky' | 'beathoven' | 'nyaw':
+				// no audio plays in the mod, but this function is called?
+				//FlxG.sound.playMusic(Paths.music('Lunchbox'), 0);
+				FlxG.sound.music.fadeIn(1, 0, 0.5);
 		}
 
 		bgFade = new FlxSprite(-200, -200).makeGraphic(Std.int(FlxG.width * 1.3), Std.int(FlxG.height * 1.3), 0xFFB3DFd8);
@@ -90,22 +95,22 @@ class DialogueBox extends FlxSpriteGroup
 			// Kapi lol
 			case 'wocky':
 				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('images/dialogueBox', 'kapi');
+				box.frames = Paths.getSparrowAtlas('dialogueBox', 'kapi');
 				box.animation.addByPrefix('normalOpen', 'Text Box Appear instance 1', 24, false);
 				box.animation.addByIndices('normal', 'Text Box Appear instance 1', [4], "", 24);
 			case 'beathoven':
 				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('images/dialogueBox', 'kapi');
+				box.frames = Paths.getSparrowAtlas('dialogueBox', 'kapi');
 				box.animation.addByPrefix('normalOpen', 'Text Box Appear instance 1', 24, false);
 				box.animation.addByIndices('normal', 'Text Box Appear instance 1', [4], "", 24);
 			case 'hairball':
 				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('images/dialogueBox', 'kapi');
+				box.frames = Paths.getSparrowAtlas('dialogueBox', 'kapi');
 				box.animation.addByPrefix('normalOpen', 'Text Box Appear instance 1', 24, false);
 				box.animation.addByIndices('normal', 'Text Box Appear instance 1', [4], "", 24);
 			case 'nyaw':
 				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('images/dialogueBox', 'kapi');
+				box.frames = Paths.getSparrowAtlas('dialogueBox', 'kapi');
 				box.animation.addByPrefix('normalOpen', 'Text Box Appear instance 1', 24, false);
 				box.animation.addByIndices('normal', 'Text Box Appear instance 1', [4], "", 24);
 		}
@@ -123,20 +128,81 @@ class DialogueBox extends FlxSpriteGroup
 		portraitLeft.scrollFactor.set();
 		add(portraitLeft);
 		portraitLeft.visible = false;
+		switch (PlayState.storyWeek) {
+			// kapi is quirky so I have to make a switch statement
+			case 9:
+				portraitLeft = new FlxSprite(0, 160);
+				portraitLeft.frames = Paths.getSparrowAtlas('profiles/kapi', 'kapi');
+				portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
+				portraitLeft.setGraphicSize(Std.int(portraitLeft.width * 1));
+				portraitLeft.updateHitbox();
+				portraitLeft.scrollFactor.set();
+				add(portraitLeft);
+				portraitLeft.visible = false;
 
-		portraitRight = new FlxSprite(0, 40);
-		portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
-		portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-		portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
-		portraitRight.updateHitbox();
-		portraitRight.scrollFactor.set();
-		add(portraitRight);
-		portraitRight.visible = false;
-		
-		box.animation.play('normalOpen');
-		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
-		box.updateHitbox();
-		add(box);
+				portraitRight = new FlxSprite(700, 145);
+				portraitRight.frames = Paths.getSparrowAtlas('profiles/bf', 'kapi');
+				portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
+				portraitRight.setGraphicSize(Std.int(portraitRight.width * 1));
+				portraitRight.updateHitbox();
+				portraitRight.scrollFactor.set();
+				add(portraitRight);
+				portraitRight.visible = false;
+				
+				portraitMiddle = new FlxSprite(350, 90);
+				portraitMiddle.frames = Paths.getSparrowAtlas('profiles/gf', 'kapi');
+				portraitMiddle.animation.addByPrefix('enter', 'Girlfriend portrait enter', 24, false);
+				portraitMiddle.setGraphicSize(Std.int(portraitRight.width * 1));
+				portraitMiddle.updateHitbox();
+				portraitMiddle.scrollFactor.set();
+				add(portraitMiddle);
+				portraitMiddle.visible = false;
+				// what the fuck does this do lmfao
+				box.animation.play('normalOpen');
+				box.setGraphicSize(Std.int(box.width * 1));
+				box.updateHitbox();
+				add(box);
+
+				dropText = new FlxText(185, 500, Std.int(FlxG.width * 1), "", 48);
+				dropText.font = 'Delfino';
+				dropText.color = 0x00000000;
+				add(dropText);
+
+				swagDialogue = new FlxTypeText(182, 497, Std.int(FlxG.width * 1), "", 48);
+				swagDialogue.font = 'Delfino';
+				swagDialogue.color = 0xFFFFFFFF;
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
+				add(swagDialogue);
+
+				dialogue = new Alphabet(0, 20, "", false, true);
+			case 6:
+				portraitRight = new FlxSprite(0, 40);
+				portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
+				portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
+				portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
+				portraitRight.updateHitbox();
+				portraitRight.scrollFactor.set();
+				add(portraitRight);
+				portraitRight.visible = false;
+
+				box.animation.play('normalOpen');
+				box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
+				box.updateHitbox();
+				add(box);
+
+				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
+				dropText.font = 'Pixel Arial 11 Bold';
+				dropText.color = 0xFFD89494;
+				add(dropText);
+
+				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
+				swagDialogue.font = 'Pixel Arial 11 Bold';
+				swagDialogue.color = 0xFF3F2021;
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
+				add(swagDialogue);
+
+				dialogue = new Alphabet(0, 80, "", false, true);
+		}
 
 		box.screenCenter(X);
 		portraitLeft.screenCenter(X);
@@ -150,18 +216,7 @@ class DialogueBox extends FlxSpriteGroup
 			// box.flipX = true;
 		}
 
-		dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
-		dropText.font = 'Pixel Arial 11 Bold';
-		dropText.color = 0xFFD89494;
-		add(dropText);
-
-		swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
-		swagDialogue.font = 'Pixel Arial 11 Bold';
-		swagDialogue.color = 0xFF3F2021;
-		swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
-		add(swagDialogue);
-
-		dialogue = new Alphabet(0, 80, "", false, true);
+		
 		// dialogue.x = 90;
 		// add(dialogue);
 	}
