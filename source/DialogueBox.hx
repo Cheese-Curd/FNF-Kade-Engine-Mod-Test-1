@@ -50,7 +50,7 @@ class DialogueBox extends FlxSpriteGroup
 			case 'wocky' | 'beathoven' | 'nyaw':
 				// no audio plays in the mod, but this function is called?
 				//FlxG.sound.playMusic(Paths.music('Lunchbox'), 0);
-				FlxG.sound.music.fadeIn(1, 0, 0.5);
+				//FlxG.sound.music.fadeIn(1, 0, 0.5);
 		}
 
 		bgFade = new FlxSprite(-200, -200).makeGraphic(Std.int(FlxG.width * 1.3), Std.int(FlxG.height * 1.3), 0xFFB3DFd8);
@@ -93,22 +93,7 @@ class DialogueBox extends FlxSpriteGroup
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
 			// Kapi lol
-			case 'wocky':
-				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('dialogueBox', 'kapi');
-				box.animation.addByPrefix('normalOpen', 'Text Box Appear instance 1', 24, false);
-				box.animation.addByIndices('normal', 'Text Box Appear instance 1', [4], "", 24);
-			case 'beathoven':
-				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('dialogueBox', 'kapi');
-				box.animation.addByPrefix('normalOpen', 'Text Box Appear instance 1', 24, false);
-				box.animation.addByIndices('normal', 'Text Box Appear instance 1', [4], "", 24);
-			case 'hairball':
-				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('dialogueBox', 'kapi');
-				box.animation.addByPrefix('normalOpen', 'Text Box Appear instance 1', 24, false);
-				box.animation.addByIndices('normal', 'Text Box Appear instance 1', [4], "", 24);
-			case 'nyaw':
+			case 'wocky' | 'beathoven' | 'hairball' | 'nyaw':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('dialogueBox', 'kapi');
 				box.animation.addByPrefix('normalOpen', 'Text Box Appear instance 1', 24, false);
@@ -120,14 +105,6 @@ class DialogueBox extends FlxSpriteGroup
 		if (!hasDialog)
 			return;
 		
-		portraitLeft = new FlxSprite(-20, 40);
-		portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
-		portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-		portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
-		portraitLeft.updateHitbox();
-		portraitLeft.scrollFactor.set();
-		add(portraitLeft);
-		portraitLeft.visible = false;
 		switch (PlayState.storyWeek) {
 			// kapi is quirky so I have to make a switch statement
 			case 9:
@@ -176,6 +153,15 @@ class DialogueBox extends FlxSpriteGroup
 
 				dialogue = new Alphabet(0, 20, "", false, true);
 			case 6:
+				portraitLeft = new FlxSprite(-20, 40);
+				portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
+				portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
+				portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
+				portraitLeft.updateHitbox();
+				portraitLeft.scrollFactor.set();
+				add(portraitLeft);
+				portraitLeft.visible = false;
+
 				portraitRight = new FlxSprite(0, 40);
 				portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
 				portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
@@ -323,6 +309,114 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					portraitRight.visible = true;
 					portraitRight.animation.play('enter');
+				}
+			case 'kapi':
+				portraitRight.visible = false;
+				portraitMiddle.visible = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('profiles/kapi', 'kapi');
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('enter');
+				}
+			case 'kapimad':
+				portraitRight.visible = false;
+				portraitMiddle.visible = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('profiles/kapimad', 'kapi');
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('enter');
+				}
+			case 'kapiconfused':
+				portraitRight.visible = false;
+				portraitMiddle.visible = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('profiles/kapiconfused', 'kapi');
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('enter');
+				}
+			case 'kapicute':
+				portraitRight.visible = false;
+				portraitMiddle.visible = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('profiles/kapicute', 'kapi');
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('enter');
+				}
+			case 'kapistare':
+				portraitRight.visible = false;
+				portraitMiddle.visible = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('profiles/kapistare', 'kapi');
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('enter');
+				}
+			case 'wap':
+				portraitRight.visible = false;
+				portraitMiddle.visible = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('profiles/wap', 'kapi');
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('enter');
+				}
+			case 'bf-kapi':
+				portraitLeft.visible = false;
+				portraitMiddle.visible = false;
+				portraitRight.frames = Paths.getSparrowAtlas('profiles/bf', 'kapi');
+				if (!portraitRight.visible)
+				{
+					portraitRight.visible = true;
+					portraitRight.animation.play('enter');
+				}
+			case 'bfwhat':
+				portraitLeft.visible = false;
+				portraitMiddle.visible = false;
+				portraitRight.frames = Paths.getSparrowAtlas('profiles/bfwhat', 'kapi');
+				if (!portraitRight.visible)
+				{
+					portraitRight.visible = true;
+					portraitRight.animation.play('enter');
+				}
+			case 'bftalk':
+				portraitLeft.visible = false;
+				portraitMiddle.visible = false;
+				portraitRight.frames = Paths.getSparrowAtlas('profiles/bftalk', 'kapi');
+				if (!portraitRight.visible)
+				{
+					portraitRight.visible = true;
+					portraitRight.animation.play('enter');
+				}
+			case 'gf':
+				portraitLeft.visible = false;
+				portraitRight.visible = false;
+				portraitMiddle.frames = Paths.getSparrowAtlas('profiles/gf', 'kapi');
+				if (!portraitMiddle.visible)
+				{
+					portraitMiddle.visible = true;
+					portraitMiddle.animation.play('enter');
+				}
+			case 'gfwave':
+				portraitLeft.visible = false;
+				portraitRight.visible = false;
+				portraitMiddle.frames = Paths.getSparrowAtlas('profiles/gfwave', 'kapi');
+				if (!portraitMiddle.visible)
+				{
+					portraitMiddle.visible = true;
+					portraitMiddle.animation.play('enter');
+				}
+			case 'gflaugh':
+				portraitLeft.visible = false;
+				portraitRight.visible = false;
+				portraitMiddle.frames = Paths.getSparrowAtlas('profiles/gflaugh', 'kapi');
+				if (!portraitMiddle.visible)
+				{
+					portraitMiddle.visible = true;
+					portraitMiddle.animation.play('enter');
 				}
 		}
 	}
